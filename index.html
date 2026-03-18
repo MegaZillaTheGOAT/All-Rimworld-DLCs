@@ -2,182 +2,1202 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>All RimWorld DLCs Download - Biotech, Royalty, Ideology, Anomaly, Odyssey</title>
-  <meta name="description" content="Download all RimWorld DLCs including Biotech, Royalty, Ideology, Anomaly, and Odyssey. All-in-one ZIP and separate DLC downloads. Version 1.6 only.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RimWorld DLC Repository | Base Game + All DLCs</title>
+  <meta name="description" content="Secure download repository for RimWorld Base Game and all DLCs. Compatible with Version 1.6.">
+
+  <!-- Preload critical images (Hero & Base Game) -->
+  <link rel="preload" as="image" href="https://i.ibb.co/gFdRmLTb/Preview.png">
+  <link rel="preload" as="image" href="https://i.ibb.co/S4DZrS54/Preview.png">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-dark: #0f1115;
+      --bg-card: #1a1d24;
+      --bg-card-hover: #232730;
+      --accent-primary: #d4af37;
+      --accent-secondary: #00d2ff;
+      --accent-danger: #ff4757;
+      --accent-success: #2ed573;
+      --text-main: #ffffff;
+      --text-muted: #a0a0a0;
+      --border-color: #2f333d;
+      --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.15);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --modal-overlay: rgba(0, 0, 0, 0.85);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Roboto', sans-serif; background-color: #f2f4f8; color: #333; line-height: 1.6; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(30, 30, 40, 0.4) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 20%);
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+
     a { text-decoration: none; color: inherit; }
 
-    /* Header / Hero */
     header {
-      background: linear-gradient(135deg, #1f1f3f, #3e3e8f);
-      color: #fff;
-      padding: 60px 20px;
       text-align: center;
+      padding: 80px 20px 40px;
+      position: relative;
     }
-    header h1 { font-size: 3rem; margin-bottom: 15px; }
-    header p { font-size: 1.2rem; color: #cfcfff; }
 
-    /* Disclaimer */
-    .disclaimer {
-      text-align: center;
-      background-color: #ffebcc;
-      padding: 15px;
-      color: #663300;
-      font-weight: 600;
-      margin-top: -20px;
-      margin-bottom: 40px;
-      border-radius: 8px;
+    header h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    header p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .version-badge, .updated-badge, .sysreq-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .version-badge { color: var(--accent-secondary); }
+    .updated-badge { color: var(--accent-success); }
+    .sysreq-badge { color: var(--accent-primary); }
+
+    .alert-box {
       max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      margin: -20px auto 50px;
+      background: rgba(255, 71, 87, 0.1);
+      border-left: 4px solid var(--accent-danger);
+      padding: 15px 25px;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: #ffcccc;
+      font-weight: 600;
+      backdrop-filter: blur(5px);
+    }
+    .alert-icon { font-size: 1.2rem; }
+
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
     }
 
-    main { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .section-title {
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+    }
 
-    /* DLC cards grid */
     .dlc-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
     .dlc-card {
-      background-color: #fff;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      padding: 20px;
-      text-align: center;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .dlc-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+      transition: var(--transition);
+      position: relative;
+      display: flex;
+      flex-direction: column;
     }
 
-    .dlc-card img {
-      width: 100%;
-      border-radius: 12px;
+    .dlc-card:hover {
+      transform: translateY(-8px);
+      background-color: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Tooltip Styles */
+    .dlc-card[data-size]:hover::after {
+      content: "Size: " attr(data-size);
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-primary);
+      color: #000;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 10;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .dlc-card[data-size]:hover::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: var(--accent-primary);
+      z-index: 9;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.2s;
+    }
+
+    .dlc-card[data-size]::after,
+    .dlc-card[data-size]::before {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, transform 0.2s;
+      pointer-events: none;
+    }
+
+    .dlc-card.hero {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 30px;
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.05), rgba(26, 29, 36, 0.9));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+      .dlc-card.hero { flex-direction: column; text-align: center; }
+      .dlc-card.hero img { margin-bottom: 20px; max-width: 200px; }
+    }
+
+.dlc-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  border-bottom: 1px solid var(--border-color);
+  transition: none;
+}
+
+.dlc-card:hover img {
+  transform: none;
+}
+
+    .dlc-card.base-game {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 30px;
+      background: linear-gradient(145deg, rgba(212, 175, 55, 0.05), rgba(26, 29, 36, 0.9));
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+.dlc-card.hero img, .dlc-card.base-game img {
+  height: 250px;
+  width: 300px;
+  border-radius: 12px;
+  border-bottom: none;
+  margin-right: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+    @media (max-width: 768px) {
+      .dlc-card.base-game img { margin-bottom: 20px; max-width: 200px; }
+      .dlc-card.base-game { flex-direction: column; text-align: center; }
+    }
+
+    .card-content {
+      padding: 25px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dlc-card.hero .card-content, .dlc-card.base-game .card-content { padding: 0; }
+
+    .dlc-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+      font-weight: 700;
+    }
+
+    .dlc-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--text-main);
+    }
+
+    .dlc-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
       margin-bottom: 15px;
     }
 
-    .dlc-card h2 { font-size: 1.3rem; margin-bottom: 15px; color: #1f1f3f; }
-
-    .dlc-card a {
-      display: inline-block;
-      padding: 12px 22px;
-      background-color: #ff6f61;
-      border-radius: 10px;
-      font-weight: 700;
+    /* Feature List Styles */
+    .feature-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--accent-secondary);
+      cursor: pointer;
+      margin-bottom: 15px;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .feature-toggle:hover {
       color: #fff;
-      transition: background-color 0.25s;
     }
-    .dlc-card a:hover { background-color: #ff3b2e; }
+    .feature-toggle svg {
+      transition: transform 0.3s ease;
+      width: 16px;
+      height: 16px;
+    }
+    .feature-toggle.active svg {
+      transform: rotate(180deg);
+    }
 
-    /* Section headings */
-    section h2 { font-size: 1.8rem; margin-bottom: 15px; text-align: center; color: #1f1f3f; }
+    .feature-list {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease;
+      opacity: 0;
+      margin-bottom: 0;
+    }
+    .feature-list.open {
+      max-height: 200px; /* Adjust based on content length */
+      opacity: 1;
+      margin-bottom: 20px;
+    }
+    .feature-list ul {
+      list-style: none;
+      padding-left: 5px;
+    }
+    .feature-list li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .feature-list li::before {
+      content: "•";
+      color: var(--accent-primary);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
 
-/* DLC list pills */
-/*.dlc-list {
-  margin-top: -20px;
-}
-.dlc-list ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-    .dlc-list li {
-      background-color: #e1e4f0;
-      padding: 10px 18px;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
       border-radius: 8px;
-      font-weight: 500;
-      color: #1f1f3f;
-      transition: background 0.25s;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: var(--transition);
+      cursor: pointer;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      gap: 8px;
     }
-    .dlc-list li:hover { background-color: #d0d4e8; }
+
+    .btn-primary {
+      background-color: var(--accent-primary);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-primary:hover {
+      background-color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-secondary);
+      color: var(--accent-secondary);
+      background-color: rgba(0, 210, 255, 0.05);
+    }
+
+    .btn-icon { font-size: 1.1rem; }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 48px;
+    }
+
+    .btn-copy:hover {
+      border-color: var(--accent-secondary);
+      color: var(--accent-secondary);
+      background: rgba(0, 210, 255, 0.05);
+    }
+
+    .btn-copy.copied {
+      border-color: var(--accent-success);
+      color: var(--accent-success);
+    }
+
+    .install-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: var(--accent-secondary);
+      cursor: pointer;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+    .install-trigger:hover { opacity: 1; text-decoration: underline; }
+
+    .steam-link {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+    .steam-link:hover {
+      color: var(--accent-secondary);
+      background: rgba(0, 210, 255, 0.05);
+    }
+    .steam-link a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .steam-link a:hover {
+      text-decoration: underline;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--modal-overlay);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      padding: 30px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-main); }
+
+    .modal h3 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: var(--accent-primary);
+    }
+
+    .modal ol {
+      padding-left: 20px;
+      color: var(--text-muted);
+    }
+
+    .modal li {
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .modal code {
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      color: var(--accent-secondary);
+    }
+
+    /* FAQ Accordion */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 18px 24px;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .faq-question:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .faq-question::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--accent-secondary);
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 24px;
+      color: var(--text-muted);
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    .included-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .pill {
+      background: rgba(255,255,255,0.05);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .pill:hover {
+      border-color: var(--accent-secondary);
+      color: var(--text-main);
+      background: rgba(0, 210, 255, 0.1);
+    }
 
     footer {
       text-align: center;
-      padding: 25px;
-      color: #777;
+      padding: 40px;
+      color: #555;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      background: #0b0d10;
+    }
+
+    .meta-info {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: #666;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--accent-primary);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-4px);
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.5);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      border: 1px solid var(--accent-success);
+      color: var(--text-main);
+      padding: 12px 24px;
+      border-radius: 10px;
       font-size: 0.9rem;
-      border-top: 1px solid #ddd;
-      background-color: #f7f7f7;
-    }*/
+      z-index: 1001;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2.5rem; }
+      .btn { padding: 12px 20px; font-size: 0.95rem; }
+      .modal { padding: 20px; }
+      .btn-row { flex-direction: column; }
+      .btn-copy { width: 100%; }
+      .scroll-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>All RimWorld DLCs</h1>
-  <p>Download all DLCs individually or as a single all-in-one ZIP file</p>
+  <h1>RimWorld Repository</h1>
+  <p>Base Game + Complete Collection of Expansions. High-speed direct downloads.</p>
+  
+  <div class="badge-row">
+    <div class="version-badge">v1.6 Only</div>
+    <div class="updated-badge">Updated: Mar 2026</div>
+    <div class="sysreq-badge">Win/macOS/Linux</div>
+  </div>
 </header>
 
-<div class="disclaimer">
-  <strong>Disclaimer:</strong> This download is compatible with <strong>RimWorld version 1.6 only.</strong>
+<div style="padding: 0 20px;">
+  <div class="alert-box">
+    <span class="alert-icon">⚠️</span>
+    <div>
+      <strong>Compatibility Warning:</strong> These files are compiled specifically for <strong>RimWorld Version 1.6</strong>. Using them on other versions may cause crashes or save corruption.
+    </div>
+  </div>
 </div>
 
 <main>
+  
+  <h2 class="section-title">Download Options</h2>
+
   <section class="dlc-grid">
-    <!-- All-in-One Download -->
-    <div class="dlc-card">
-    <img src="https://i.ibb.co/gFdRmLTb/Preview.png" alt="All-in-One DLC">
-      <h2>All-in-One DLC ZIP</h2>
-      <a href="https://drive.google.com/uc?export=download&id=1sCCI0sx66uQySkbRcW1Z9R_zE-9Dr__9" target="_blank">Download All-in-One</a>
+    
+    <!-- Base Game Card -->
+    <div class="dlc-card base-game" data-size="231 MB" data-download="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV">
+      <img src="https://i.ibb.co/gFdRmLTb/Preview.png" alt="RimWorld Base Game">
+      <div class="card-content">
+        <div>
+          <span class="dlc-tag">Required • Core Game</span>
+          <h2>RimWorld Base Game</h2>
+          <p>The core sci-fi colony sim. Required to run any DLCs. Includes the latest v1.6 updates and patches.</p>
+          
+          <div class="feature-wrapper">
+            <div class="feature-toggle" onclick="toggleFeatures(this)">
+              <span>View Key Features</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="feature-list">
+              <ul>
+                <li>Procedurally generated stories</li>
+                <li>Complex AI colonists & enemies</li>
+                <li>Dynamic weather & seasons</li>
+                <li>Extensive modding support</li>
+              </ul>
+            </div>
+          </div>
+
+          <span class="meta-info">Size: 231 MB • Format: .ZIP</span>
+        </div>
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank" class="btn btn-primary">
+            <span class="btn-icon">↓</span> Download Base Game
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('base')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Prefer official? Then Buy it on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- All-in-One Hero Card -->
+    <div class="dlc-card hero" data-size="272 MB" data-download="https://drive.google.com/uc?export=download&id=1sCCI0sx66uQySkbRcW1Z9R_zE-9Dr__9">
+      <img src="https://i.ibb.co/gFdRmLTb/Preview.png" alt="Complete Collection">
+      <div class="card-content">
+        <div>
+          <span class="dlc-tag">Recommended • Best Value</span>
+          <h2>Complete Collection ZIP</h2>
+          <p>Get every expansion in a single archive. Includes Biotech, Royalty, Ideology, Anomaly, and Odyssey. Pre-configured for immediate installation.</p>
+          
+          <div class="feature-wrapper">
+            <div class="feature-toggle" onclick="toggleFeatures(this)">
+              <span>View Included DLCs</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="feature-list">
+              <ul>
+                <li><strong>Biotech:</strong> Mechanoids, Genemods, Children</li>
+                <li><strong>Royalty:</strong> Psychic Powers, Empire Quests</li>
+                <li><strong>Ideology:</strong> Custom Beliefs & Rituals</li>
+                <li><strong>Anomaly:</strong> Horror Entities & Containment</li>
+                <li><strong>Odyssey:</strong> New Biomes & Gravships</li>
+              </ul>
+            </div>
+          </div>
+
+          <span class="meta-info">Size: 272 MB • Format: .ZIP</span>
+        </div>
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1sCCI0sx66uQySkbRcW1Z9R_zE-9Dr__9" target="_blank" class="btn btn-primary">
+            <span class="btn-icon">↓</span> Download Full Bundle
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1sCCI0sx66uQySkbRcW1Z9R_zE-9Dr__9')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('bundle')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
 
     <!-- Individual DLCs -->
-    <div class="dlc-card">
-      <img src="https://i.ibb.co/S4DZrS54/Preview.png" alt="Biotech DLC">
-      <h2>Biotech</h2>
-      <a href="https://drive.google.com/uc?export=download&id=1gUJTB0UW13zMi4GrjpwaeZ448MJy7ejO" target="_blank">Download</a>
+    <div class="dlc-card" data-size="47 MB" data-download="https://drive.google.com/uc?export=download&id=1gUJTB0UW13zMi4GrjpwaeZ448MJy7ejO">
+      <img src="https://i.ibb.co/S4DZrS54/Preview.png" alt="Biotech DLC" loading="lazy">
+      <div class="card-content">
+        <span class="dlc-tag">Expansion</span>
+        <h2>Biotech</h2>
+        <p>Mechanoids, genemods, and children. Expand your colony's biological capabilities.</p>
+        
+        <div class="feature-wrapper">
+          <div class="feature-toggle" onclick="toggleFeatures(this)">
+            <span>View Features</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="feature-list">
+            <ul>
+              <li>Build mechanoid armies</li>
+              <li>Design custom genemods</li>
+              <li>Raise children with traits</li>
+              <li>Pollution mechanics</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1gUJTB0UW13zMi4GrjpwaeZ448MJy7ejO" target="_blank" class="btn btn-secondary">
+            Download Biotech
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1gUJTB0UW13zMi4GrjpwaeZ448MJy7ejO')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('biotech')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
-    <div class="dlc-card">
-      <img src="https://i.ibb.co/zhv2Bytp/Preview.png" alt="Royalty DLC">
-      <h2>Royalty</h2>
-      <a href="https://drive.google.com/uc?export=download&id=1wkVHz9GYkjCM8tgCNDEwhyiEZmCQJ2Pm" target="_blank">Download</a>
+
+    <div class="dlc-card" data-size="44 MB" data-download="https://drive.google.com/uc?export=download&id=1wkVHz9GYkjCM8tgCNDEwhyiEZmCQJ2Pm">
+      <img src="https://i.ibb.co/zhv2Bytp/Preview.png" alt="Royalty DLC" loading="lazy">
+      <div class="card-content">
+        <span class="dlc-tag">Expansion</span>
+        <h2>Royalty</h2>
+        <p>Prestige, psychic powers, and imperial quests. Rule your colony with an iron fist.</p>
+        
+        <div class="feature-wrapper">
+          <div class="feature-toggle" onclick="toggleFeatures(this)">
+            <span>View Features</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="feature-list">
+            <ul>
+              <li>Psychic powers & abilities</li>
+              <li>Noble titles & prestige</li>
+              <li>Imperial quests & rewards</li>
+              <li>Orbital trade ships</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1wkVHz9GYkjCM8tgCNDEwhyiEZmCQJ2Pm" target="_blank" class="btn btn-secondary">
+            Download Royalty
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1wkVHz9GYkjCM8tgCNDEwhyiEZmCQJ2Pm')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('royalty')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
-    <div class="dlc-card">
-      <img src="https://i.ibb.co/jv911Hw1/Preview.png" alt="Ideology DLC">
-      <h2>Ideology</h2>
-      <a href="https://drive.google.com/uc?export=download&id=1txMVWPPRWVOOMi3ZGeZxUdg53hDThQgO" target="_blank">Download</a>
+
+    <div class="dlc-card" data-size="28 MB" data-download="https://drive.google.com/uc?export=download&id=1txMVWPPRWVOOMi3ZGeZxUdg53hDThQgO">
+      <img src="https://i.ibb.co/jv911Hw1/Preview.png" alt="Ideology DLC" loading="lazy">
+      <div class="card-content">
+        <span class="dlc-tag">Expansion</span>
+        <h2>Ideology</h2>
+        <p>Define your colony's belief system. From cannibals to tree-skinners, play your way.</p>
+        
+        <div class="feature-wrapper">
+          <div class="feature-toggle" onclick="toggleFeatures(this)">
+            <span>View Features</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="feature-list">
+            <ul>
+              <li>Custom belief systems</li>
+              <li>Rituals & memes</li>
+              <li>Relic hunting missions</li>
+              <li>Diverse role requirements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1txMVWPPRWVOOMi3ZGeZxUdg53hDThQgO" target="_blank" class="btn btn-secondary">
+            Download Ideology
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1txMVWPPRWVOOMi3ZGeZxUdg53hDThQgO')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('ideology')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
-    <div class="dlc-card">
-      <img src="https://i.ibb.co/Fb0H0hDZ/Preview.png" alt="Anomaly DLC">
-      <h2>Anomaly</h2>
-      <a href="https://drive.google.com/uc?export=download&id=1NHJ7eXqGlg9r7qad_BW0JDKLc2sJNdYp" target="_blank">Download</a>
+
+    <div class="dlc-card" data-size="83 MB" data-download="https://drive.google.com/uc?export=download&id=1NHJ7eXqGlg9r7qad_BW0JDKLc2sJNdYp">
+      <img src="https://i.ibb.co/Fb0H0hDZ/Preview.png" alt="Anomaly DLC" loading="lazy">
+      <div class="card-content">
+        <span class="dlc-tag">Expansion</span>
+        <h2>Anomaly</h2>
+        <p>Contain the unknown. Dark entities, rituals, and horror elements await.</p>
+        
+        <div class="feature-wrapper">
+          <div class="feature-toggle" onclick="toggleFeatures(this)">
+            <span>View Features</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="feature-list">
+            <ul>
+              <li>Eldritch horror entities</li>
+              <li>Containment cells & protocols</li>
+              <li>Dark rituals & sacrifices</li>
+              <li>New research tree</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=1NHJ7eXqGlg9r7qad_BW0JDKLc2sJNdYp" target="_blank" class="btn btn-secondary">
+            Download Anomaly
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=1NHJ7eXqGlg9r7qad_BW0JDKLc2sJNdYp')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('anomaly')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
-    <div class="dlc-card">
-      <img src="https://i.ibb.co/hx78YxXX/Preview.png" alt="Odyssey DLC">
-      <h2>Odyssey</h2>
-      <a href="https://drive.google.com/uc?export=download&id=12Z62cQWIiFSPitwKnPku4NvdGMvbEkR1" target="_blank">Download</a>
+
+    <div class="dlc-card" data-size="71 MB" data-download="https://drive.google.com/uc?export=download&id=12Z62cQWIiFSPitwKnPku4NvdGMvbEkR1">
+      <img src="https://i.ibb.co/hx78YxXX/Preview.png" alt="Odyssey DLC" loading="lazy">
+      <div class="card-content">
+        <span class="dlc-tag">Expansion</span>
+        <h2>Odyssey</h2>
+        <p>The latest frontier. New biomes, gravships, and exploration mechanics.</p>
+        
+        <div class="feature-wrapper">
+          <div class="feature-toggle" onclick="toggleFeatures(this)">
+            <span>View Features</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+          <div class="feature-list">
+            <ul>
+              <li>Interstellar gravships</li>
+              <li>New exotic biomes</li>
+              <li>Advanced exploration tools</li>
+              <li>Expanded endgame content</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <a href="https://drive.google.com/uc?export=download&id=12Z62cQWIiFSPitwKnPku4NvdGMvbEkR1" target="_blank" class="btn btn-secondary">
+            Download Odyssey
+          </a>
+          <button class="btn-copy" onclick="copyLink(this, 'https://drive.google.com/uc?export=download&id=12Z62cQWIiFSPitwKnPku4NvdGMvbEkR1')" title="Copy Download Link">
+            🔗
+          </button>
+        </div>
+        <span class="install-trigger" onclick="openModal('odyssey')">
+          <span class="btn-icon">⚙️</span> How to Install
+        </span>
+        <span class="steam-link">
+          Don't own the base game? Buy on <a href="https://store.steampowered.com/app/294100/RimWorld/" target="_blank">Steam</a> or Download The <a href="https://drive.google.com/uc?export=download&id=1GtM-nsXvfJZ0qR8JTf54wt4s5mXjsTAV" target="_blank">Base Game</a> on Our Site.
+        </span>
+      </div>
     </div>
   </section>
 
-  <section class="dlc-list">
-    <h2>Included DLCs</h2>
-    <ul>
-      <li>Biotech</li>
-      <li>Royalty</li>
-      <li>Ideology</li>
-      <li>Anomaly</li>
-      <li>Odyssey</li>
-    </ul>
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <button class="faq-question">Do I need the base RimWorld game?</button>
+      <div class="faq-answer">
+        Yes. These are expansion packs that require the base RimWorld game (version 1.6) installed. You can download the Base Game from the top card on this page.
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <button class="faq-question">How do I install these DLCs?</button>
+      <div class="faq-answer">
+        After downloading, extract the ZIP file. Move the extracted folder into your <code>RimWorld/Data</code> directory. Launch RimWorld, go to the Mods menu, enable the DLC, and restart the game. Click the "How to Install" link on any card for detailed steps.
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <button class="faq-question">Are these files safe?</button>
+      <div class="faq-answer">
+        Yes. All files are official RimWorld packages, unmodified and sourced directly. We recommend scanning downloads with your antivirus as a general best practice.
+      </div>
+    </div>
+    
+    <div class="faq-item">
+      <button class="faq-question">Will these work on macOS or Linux?</button>
+      <div class="faq-answer">
+        Yes. RimWorld and its DLCs are platform-agnostic. As long as you have RimWorld 1.6 running on Windows, macOS, or Linux, these expansions will work.
+      </div>
+    </div>
   </section>
+
+  <div class="included-list">
+    <span class="pill">✓ Base Game</span>
+    <span class="pill">✓ Biotech</span>
+    <span class="pill">✓ Royalty</span>
+    <span class="pill">✓ Ideology</span>
+    <span class="pill">✓ Anomaly</span>
+    <span class="pill">✓ Odyssey</span>
+    <span class="pill">✓ v1.6 Patch Included</span>
+  </div>
+
 </main>
 
+<!-- Installation Modal -->
+<div class="modal-overlay" id="installModal" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModalBtn()">&times;</button>
+    <h3 id="modalTitle">Installation Guide</h3>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top" id="scrollTop" onclick="scrollToTop()" title="Back to Top">↑</button>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">Link copied to clipboard!</div>
+
 <footer>
-  &copy; 2026 Megazilla. All rights reserved.
+  <p>&copy; 2026 Megazilla. All rights reserved.</p>
+  <p style="margin-top: 10px; opacity: 0.5; font-size: 0.75rem;">RimWorld is a trademark of Ludeon Studios. This site is not affiliated with Ludeon Studios.</p>
 </footer>
+
+<script>
+  // Installation content for different types
+  const installContent = {
+    base: {
+      title: 'Base Game Installation',
+      html: `
+        <ol>
+          <li>Download the Base-Game.</li>
+          <li>Extract the <code>.zip</code> file using 7-Zip, WinRAR, or your OS built-in tool.</li>
+          <li>Place the Game Wherever you want.</li>
+          <li>Run the <code>.EXE</code> and you're done.</li>
+        </ol>
+        <p style="margin-top:20px; color:var(--text-muted); font-size:0.9rem;">
+          <strong>Note:</strong> The base game is a standalone executable and doesn't require Steam or any launcher.
+        </p>
+      `
+    },
+    bundle: {
+      title: 'DLC Installation Guide',
+      html: `
+        <ol>
+          <li>Download your chosen DLC (or the All-in-One bundle).</li>
+          <li>Extract the <code>.zip</code> file using 7-Zip, WinRAR, or your OS built-in tool.</li>
+          <li>Locate your RimWorld installation folder:
+            <ul style="margin-top:8px; padding-left:20px; color:var(--text-muted);">
+              <li><strong>Steam Windows:</strong> <code>C:\Program Files (x86)\Steam\steamapps\common\RimWorld</code></li>
+              <li><strong>Steam macOS:</strong> <code>~/Library/Application Support/Steam/steamapps/common\RimWorld</code></li>
+              <li><strong>Linux:</strong> <code>~/.steam/steam/steamapps/common\RimWorld</code></li>
+            </ul>
+          </li>
+          <li>Move the extracted DLC folder into <code>RimWorld/Data</code>.</li>
+          <li>Launch RimWorld, click <strong>Mods</strong> in the main menu.</li>
+          <li>Find the DLC in the list, check the box to enable it.</li>
+          <li>Click <strong>Apply</strong> and restart the game when prompted.</li>
+        </ol>
+        <p style="margin-top:20px; color:var(--text-muted); font-size:0.9rem;">
+          <strong>Troubleshooting:</strong> If the DLC doesn't appear, verify that your RimWorld version is 1.6 and that the folder structure inside <code>Data</code> matches the original DLC layout.
+        </p>
+      `
+    }
+  };
+
+  // Feature Toggle Function
+  function toggleFeatures(element) {
+    element.classList.toggle('active');
+    const list = element.nextElementSibling;
+    list.classList.toggle('open');
+  }
+
+  // FAQ Accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    });
+  });
+
+  // Modal Functions
+  function openModal(type) {
+    const modal = document.getElementById('installModal');
+    const title = document.getElementById('modalTitle');
+    const content = document.getElementById('modalContent');
+    
+    if (type === 'base') {
+      title.textContent = installContent.base.title;
+      content.innerHTML = installContent.base.html;
+    } else {
+      title.textContent = installContent.bundle.title;
+      content.innerHTML = installContent.bundle.html;
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModalBtn() {
+    document.getElementById('installModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeModal(e) {
+    if (e.target.id === 'installModal') {
+      closeModalBtn();
+    }
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModalBtn();
+  });
+
+  // Copy Link Function
+  function copyLink(btn, url) {
+    navigator.clipboard.writeText(url).then(() => {
+      btn.classList.add('copied');
+      btn.textContent = '✓';
+      showToast('Link copied to clipboard!');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = '🔗';
+      }, 2000);
+    }).catch(() => {
+      showToast('Failed to copy link');
+    });
+  }
+
+  // Toast Notification
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+
+  // Scroll to Top Button
+  const scrollTopBtn = document.getElementById('scrollTop');
+  
+  window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 400) {
+      scrollTopBtn.classList.add('visible');
+    } else {
+      scrollTopBtn.classList.remove('visible');
+    }
+  });
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
